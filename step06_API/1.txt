@@ -1,0 +1,203 @@
+이름 
+
+
+***********************************************************
+박정민
+
+if(dept.getDeptno() == deptno) {
+			
+			dept.setLoc(loc);	
+		}
+
+***********************************************************
+
+
+
+
+
+
+***********************************************************
+
+엄호용
+	static void dptReloc(String dname, String loc) {
+		if(dname.equals("RESEARCH")) {
+			dept.setLoc(loc);
+		} // else if() 다른 부서 위치 변경
+	}
+
+
+***********************************************************
+
+은혜선
+//높은 연봉 
+	static void empHighSalprint(ArrayList<Employee> emps) {
+		for (Employee emp : emps) {
+			if(emp.getSal() > 1000) {
+				System.out.println(emp);
+			}else {
+				continue;
+			}
+		}
+	}
+
+//보너스 
+	static void setBonus(ArrayList<Employee> emps) {
+		for(Employee emp:emps) {
+			Double bonus = emp.getSal() * 0.1;
+			System.out.println(emp.toString() + "Bonus: "+Math.ceil(bonus));
+		}
+	}
+
+
+
+
+최소영
+
+public class ArrayListWrapperTest2 {
+	
+	
+	// 부서 정보 ArrayList
+	static ArrayList<Department> getDept(){
+		ArrayList<Department> dept = new ArrayList();
+		
+		dept.add(new Department(100, "IT", "서초"));
+		dept.add(new Department(200, "DS", "용인"));
+		dept.add(new Department(300, "CS", "판교"));	
+		
+		return dept;
+	}
+	
+
+	// 직원 정보 ArrayList
+	static ArrayList<Employee> getEmps(ArrayList<Department> dept){
+	
+		ArrayList<Employee> emps = new ArrayList<>();
+				
+		emps.add(new Employee(1, "김민지", 900.5, dept.get(0)));
+		emps.add(new Employee(2, "이철수", 1000.10, dept.get(1)));
+		emps.add(new Employee(3, "신민철", 600, dept.get(1)));
+		emps.add(new Employee(3, "유혜진", 1000, dept.get(2)));
+		emps.add(new Employee(3, "최민기", 400, dept.get(2)));
+		
+		return emps;
+	}
+	
+	// 전직원 정보 조회 메소드
+	static void empInfoPrint(ArrayList<Employee> emps) {
+		for(Employee emp : emps) {
+			System.out.println(emp);
+		}
+		}
+	
+	// sal 1000 이상 직원 정보 조회 메소드
+	static void empSal(ArrayList<Employee> emps) {
+		for(Employee emp : emps) {
+			if (emp.getSal() > 1000) {
+				System.out.println(emp);
+			}	
+			}
+	}
+
+	// 특정 부서 정보 조회 메소드
+	static void empDept(ArrayList<Employee> emps, String d) {
+		for(Employee emp : emps) {
+			if (emp.getDept().getDname() == d) {
+				System.out.println(emp);
+				}	
+				}
+	}
+	
+	// 부서 지역 변경 메소드
+	static void setDepartmentloc(ArrayList<Department> dept) {
+		dept.get(0).setLoc("구로");
+	
+}
+		
+	public static void main(String[] args) {
+		System.out.println("**전직원 정보**");
+		empInfoPrint(getEmps(getDept()));
+		System.out.println();
+		
+		System.out.println("**sal 1000 이상  직원 정보**");
+		empSal(getEmps(getDept()));
+		System.out.println();
+
+		System.out.println("**특정 부서 정보 - IT**");
+		empDept(getEmps(getDept()), "IT");
+		System.out.println();
+		
+		System.out.println("**특정 부서 정보 - DS**");
+		empDept(getEmps(getDept()), "DS");
+		System.out.println();
+
+
+
+
+
+
+
+
+최윤지
+
+static Department d1 = new Department(100, "IT", "서울");
+static Department d2 = new Department(200, "MARKETING", "서울");
+static Department d3 = new Department(200, "SALES", "판교");
+
+// Q. 두명의 직원 정보를 생성해 ArrayList에 저장 후 반환
+	static ArrayList<Employee> getEmps() {
+		Employee e1 = new Employee(1, "최윤지", 400, d1); 
+		Employee e2 = new Employee(2, "지윤초", 270, d1); 
+		Employee e3 = new Employee(3, "최윤재", 380, d1); 
+		Employee e4 = new Employee(4, "최예지", 410, d3); 
+		Employee e5 = new Employee(5, "지윤채", 260, d2); 
+		
+		ArrayList<Employee> al = new ArrayList<Employee>();
+		al.add(e1);
+		al.add(e2);
+		al.add(e3);
+		al.add(e4);
+		al.add(e5);
+		
+		return al;
+	}
+
+
+// Mission. IT 부서에 속한 사원 중 월급이 300인 이상인 사원의 이름, 부서명, 월급 출력 
+	static void itOver300Print(ArrayList<Employee> al) {
+		for(Employee emp:al) {
+			if(emp.getDept().getDname().equals("IT") && emp.getSal() >= 300) {
+				System.out.println("사원: "+emp.getEname()+"\t부서: "+emp.getDept().getDname()+"\t월급: "+emp.getSal());
+			}
+	
+	}
+	}
+최우성_직원 이름으로 정보 찾기
+
+static void findEmpInfo(ArrayList<Employee> emps, String name) {
+		for(Employee emp : emps) {
+			if(name.equals(emp.getEmp_name())) {
+				System.out.println(emp.toString());
+			}	
+			}
+}
+
+public static void main(String[] args) {
+
+		findEmpInfo(getEmps(), "명수");	
+	}
+}
+
+
+
+
+신선_직원번호로 직원 정보 찾기
+static Employee getEmployee(ArrayList<Employee> emps, int empno) {
+		for (Employee emp : emps) {
+			if (emp.getEmpno() == empno) {
+				System.out.println("getEmpno " + emp.getEmpno() + " empno " + empno);
+				return emp;
+			}
+		}
+		return null;
+	}
+

@@ -1,0 +1,116 @@
+OOP
+
+1. 상속과 다형성 주요 메카니즘
+	- java.lang.Object가 최상위 root
+	- 11개 메소드 자동 상송
+	- data 처리용 클래스에서 고려할 메소드
+		참조 변수값을 print()/println() 시에 자동 호출하는 메소드 - public String ToString(){}
+		객체들의 내용값 비교로 재정의 권장 - Object 클래스에선 저장된 객체명과 주소값 비교 - public boolean equals(Object o){}
+		
+2. 개발 시 상속과 다형성 구조로 개발을 반드시 해야한다는 의미는 아님
+
+3. 상속
+	- 실생활의 상속관계를 프로그램에 적용
+	- 구조 : 부모 클래스 - 자식 클래스
+	다형성
+		- 상속이 전제가 되는 구조에서만 관련
+		- 상위타입 변수 = 자손객체 -> 자동 형변환
+		- 자손타입 변수 = (자손타입)상위타입 -> 명시적인 형변환
+		- 장점(필요성) : 코드 재사용성 향상
+		
+		
+4. 장점
+	- 코드의 재사용
+	- 기업 관점 비용 절감
+	
+5. 문법
+	- 변수와 메소드만 상속
+	- 클래스 선언구에서 부모의 상속 관계 형성
+		class 자식 클래스명 extends 부모 클래스 {
+			멤버 변수와 메소드 추가 구현
+			부모의 변수와 메소드 상속
+		}
+	- 메소드의 {} body 내용을 수정
+		- 메소드 재정의
+		- method overriding
+	- 객체 생성 방식
+		상위 타입 변수 = new 자손 생성자([..]);
+	- 주요 키워드
+		- super([..]) : 생성자 내부에서 부모 생성 호출
+		- super. : 메소드 네부에서 재정의 시 상속하는 메소드 로직 그대로 적용하고자 할 경우 호출
+			
+6. 종합
+	- 객체 생성 사유 : 데이터 사용을 위한 메모리 생성 및 활용
+	- 상속 : 코드 재사용
+	- 객체 생성 방식
+		- 생성자 호출로 객체 생성
+		- 생성자 호출로 객체가 생성되었다는 의미
+			class가 보유한 멤버 변수들의 실제 사용 가능한 공간을 메모리에 생성을 의미
+			
+	Parent p = new Parent(); // name 변수와 age 변수란 이름으로 메모리 생성 구분하여 활용 가능
+	Child p = new Child(); // name, age, job 메모리 새성
+	Parent p = new Child(); // name, age, job 메모리 새성
+	
+	다형성 필요성 이해하기 
+		class A extends Object{} 
+		class B extends A{} 
+		class C extends B{} 
+		
+		class D extends A{} 
+	
+		Object o = new Object();  o
+			"	 = new A(); o
+			"	 = new B(); o
+			"	 = new C(); o
+			"	 = new D(); o
+			
+		A a = new Object();  x
+			"	 = new A();  o
+			"	 = new B();  o
+			"	 = new C();  o
+			"	 = new D();  o
+			
+		B a = new Object();  x
+			"	 = new A();  x
+			"	 = new B();  o
+			"	 = new C();  o
+			"	 = new D();	 x		
+	
+		C a = new Object();  x
+			"	 = new A();  x
+			"	 = new B();  x
+			"	 = new C();  o
+			"	 = new D();  x			
+	
+		D a = new Object();  x
+			"	 = new A();  x
+			"	 = new B();  x
+			"	 = new C();  x
+			"	 = new D();	 o
+			
+		객체 타입 다 parameter로 받아서 내용값 출력 로직의 메소드라 가정
+		public void print(Object o){ // Object, A, B, C, D ...모든 객체 타입 다 수용
+			S.o.p(o);
+		}					
+	
+		만일 Object 타입으로 선언하지 않았을 경우엔 필요에 따라 동일한 기능의 parmeter가 다른 메소드
+		구현 해야 하는 불필요한 작업
+		public void print(D o){  // D
+			S.o.p(o);
+		}	
+		public void print(C o){  // C
+			S.o.p(o);
+		}	
+			
+
+* 클래스 구성 요소
+package
+import
+
+class {
+	변수
+	생성자
+	메소드
+	static{}
+	이너클래스{}
+}

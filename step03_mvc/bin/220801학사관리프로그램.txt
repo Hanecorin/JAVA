@@ -1,0 +1,25 @@
+1. 주제
+	- 학사 관리 프로그램
+	- 데이터
+		학생
+			이름, 학번("문자열"), 학년(1, 2, 3), ...
+			builder 형식 
+		과목
+			과목명, 담당샘명
+		 	기본 생성자, 생성자
+			
+	- 학생의 정보에 과목까지 포함? 미포함?
+		1. 미포함 
+		2. 포함
+		
+2. 구조
+	1. 데이터 표현용 Student.java/Subject.java
+		- Data Transfer Object (DTO) pattern)
+		- Value Object(VO)
+	2. 화면 구성 : View
+		시작 화면/응답화면(정상응답, 비정상 응답)
+	3. 검색 요청, 수정 요청등의 요청 구분 : Controller
+	4. 임시 데이터를 생성하고 마치 sql 사용하는 핵심 로직 : Model	
+	
+	
+	StartView -> Controller -> Model : Student&Subject -> Controller -> SuccessView or FileView

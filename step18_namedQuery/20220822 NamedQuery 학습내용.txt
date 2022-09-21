@@ -1,0 +1,6 @@
+Named Query
+
+1. entity 클래스 선언구에 sql문장 생성
+	- table명 기준이 아닌 entity클래스명 기준으로 JPQL
+	
+2. 

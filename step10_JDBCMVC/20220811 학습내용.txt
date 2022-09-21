@@ -1,0 +1,12 @@
+MVC/DAO(Data Access Object : sql 문장으로 DB와 직접 소통하는 class) pattern, emp table
+	table
+		1. select * from emp
+		2. select * form emp where empno=
+		3. insert into emp (?, ?, ?, ...)
+		4. update emp sal = sal * 1.5 where dept no
+		5. delete from emp where empno=
+	
+	class
+		1. EmpDAO
+		2. Start/Success/Fail/Controller
+		3. EmpDTO

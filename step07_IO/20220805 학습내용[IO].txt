@@ -1,0 +1,41 @@
+데이터 입출력
+
+1. java.io package 에서 제공하는 API 개발
+
+2. 개발 방법
+	- 입력 객체와 출력 객체 별도 생성
+		- python과 달리 입출력을 동시에 수행 불가
+	- 읽고, 쓰기는 메소드로 실행
+	
+	- 단순 읽기, 쓰기에 효율성을 고려한 filter 기능 추가 개발
+		- 필수 IO : node
+		- 옵션 IO : filter
+	
+3. 입출력 단위
+	1byte씩(8bit) 읽고.쓰기
+		읽기 API : ~InputStream			
+		쓰기 API : ~OuputStream
+			예시
+				이미지, 음성 등의 binary 등은 1byte(8bit)단위로 read 주로 사용
+		
+	2byte씩(16bit) 읽고.쓰기
+		읽기 API : ~Reader	
+		쓰기 API : ~Writer
+			예시
+				한글 파일들 읽고, 쓰기 
+				FileReader / FileWriter
+	
+	1byte 와 2byte 호환 API
+		읽기 : InputStreamReader
+		쓰기 : OuputStreamWriter
+	
+	
+4. IO API로 데이터 읽고.쓰기 시에는 시스템의 내부 자원 활용
+	- 반환 필수 : close()	
+	
+5. 실습 단계
+	1단계 - file(poem.txt)로 부터 데이터 read해서 콘솔(System.out)에 출력
+	2단계 - file로 부터 데이터 	read해서 새로운 파일로 출력(file upload 개념)
+	3단계 - 실시간 키보드 입력한 내용을 file에 출력 
+		(콘솔창 : System.out / 키보드 : System.in)
+								1byte단위로 read

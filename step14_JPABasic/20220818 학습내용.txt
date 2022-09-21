@@ -1,0 +1,79 @@
+JPA 학습
+
+1. 자동 생성된 table 구조와 Entity 클래스 관계
+
+	create table Member (
+		member_id bigint not null auto_increment, 
+		name varchar(10), 
+		team_id bigint, 
+		primary key (member_id)
+	) engine=InnoDB
+	
+	
+	@Entity : table 구조 자체 table명이 class명
+	public class Member {
+		@Id	  												- pk 의미, 생략 불가 
+		@GeneratedValue(strategy = GenerationType.IDENTITY) - auto increment 의미
+		@Column(name="member_id")							- member_id 라는 컬럼명 의미 
+		private long memberId;								- member_id와 연계된 자바의 멤버 변수, long타입 -> db에서 bitint
+		
+		@Column(length = 10)								- name varchar(10) 의미, 컬럼명 없이 선언된 경우 멤버 변수명이 컬럼명
+		private String name;
+		
+		@Column(name="team_id")   
+		private long teamId;								- team_id bigint 컬럼 의미
+	}
+
+2. JDBC API 개발 단계
+	driver 로딩 -> Connection 생성 -> Statement 생성 -> ResultSet생성(검색인 경우) -> 활용 -> 자원반환
+	
+	
+	
+	
+3. 개발 구조
+	1. persistence.xml
+		- db의 모든 접속 관련된 정보
+		- table 생성할 것인지 아니면 이미 존재하는 table 사용할 것인지에 대한 설정	
+	
+	
+	
+	2. java 코드
+	public void step01() {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbinfo");
+		- persistence.xml의 <persistence-unit name="dbinfo"> tag의 정보 획득
+			해당 정보는 EntityManagerFactory  객체가 보유
+			
+			
+		EntityManager em = emf.createEntityManager();
+		- Connection, PreparedStatement, ResultSet 등 crud 가능한 모든 로직 보유
+		
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();			
+		- insert/update/delete 시에 영구 저장을 위한 tx 처리의 시작
+		
+		Member m1 = new Member("현주엽", 1);  
+		- insert 문장 생성 : insert into member (name, team_id) values('현주엽', 1)
+		
+		
+		em.persist(m1);
+		- 실제 insert sql문장 실행  
+
+
+		tx.commit();
+		- 영구저장 sql의 commit
+	}
+	
+
+4. 실습
+	1단계 - 샘플 코드 이해 및 구조 파악해 보기
+	2단계 - 직접 entity 설계해서 db에 table 생성하기
+		- Member.java처럼 만들고 실행해서 확인까지 
+		
+		person table
+create table person(
+	id int primary key AUTO_INCREMENT, 
+	name varchar(10),
+	age int
+);
+insert into person (name, age) values ('유재석', 40);

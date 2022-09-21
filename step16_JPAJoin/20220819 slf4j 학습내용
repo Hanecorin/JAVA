@@ -1,0 +1,26 @@
+
+1. log기록용 애노테이션
+	@Slf4j
+	- @Slf4j 사용을 위한 library 설정 & log4j.properties 필요 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+	- 사용하는 방법
+		- log 변수가 이미 존재 코드 상에서 변수 선언없이 메소드 호출해서 사용
+		info() / debug() 의 메소드만 호출 
+		
+2. new 생성자 호출문법을 다양하게 처리 할수 있는 기술
+	@RequiredArgsConstructor
+		- class 선언구
+		- @NonNull 과 함께 사용
+	@NonNull
+		- 멤버 변수 선언구
+		- 이 변수는 반드시 초기화, 생성자의 필수 parameter 선언과 동일

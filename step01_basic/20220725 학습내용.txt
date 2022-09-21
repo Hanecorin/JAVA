@@ -1,0 +1,150 @@
+학습 내용
+
+1. 변수 선언 및 호출 방법
+	python 과 비교
+		- 이름값 저장하는 변수 선언 및 초기화
+		name = '김혜경'
+		name = "김혜경" 
+		
+		name = 10  ok
+	
+	java
+		String name = "김혜경";
+		- name 변수에는 문자열(String) 타입만 가능
+		
+		int age = 10;
+	
+	sql
+		create table person(
+			name varchar(20),
+			age int
+		);
+	
+	
+2. 메소드 구현 및 호출 방법
+	python
+		def getName():
+			return "이름"
+		
+		def getName():
+			return 10
+			
+		# 두개의 값 받아서 + 연산, 출력
+		def sum(v1, v2):
+			result = v1 + v2
+			print(result)
+			
+			
+		sum(1, 2)   3
+		sum("1", "2")  12
+					
+			
+	java
+		String getName(){
+			return "이름";
+		}
+
+		String getName(){   오류
+			return 10;
+		}
+	
+		void sum(int v1, int v2){
+			int result = v1 + v2;
+			System.out.println(result);
+		}
+		sum(1, 2)   3
+		sum("1", "2")   에러
+
+
+
+3. 생성자 구현 및 호출 방법
+	python
+		__init__():
+	java
+		클래스명(){}
+		
+
+4. lombok을 활용한 코드 다이어트 
+
+5. 담소 시간
+	- 조건 없이 수다방 개설
+		- 랜덤으로 소회의실 개설
+		
+		
+		
+*** 1. java 프로그램 실행 방식 
+
+1. java에서 실행을 위한 필수 메소드
+	1. public static void main(String[] args){}	
+	
+	
+2. 단위 test인 jUnit framework 사용시
+	1. main 메소드 없이도 실행 가능
+	2. @Test - 선언된 메소드 실행
+	
+		
+3. server 즉 web 
+	1. server와 browser로 실행
+	
+		
+		
+*** 문법
+1. 변수 선언 
+	타입 변수명;
+	타입 변수명 = 값;
+	
+2. 객체 생성 문법
+	타입 변수명 = new 생성자();	
+	변수 - 객체 참조 변수, 객체가 메모리에 생성되어 저장된 위치값 보유
+		- 객체가 보유한 모든 변수와 메소드 사용 가능하게 하는 변수
+		
+		
+3. access modifier
+	1. 기능 : 접근 범위 제한
+	2. 종류	
+		1. public
+			- 외부 클래스에서 access 가능 의미
+		2. private		
+			- 외부 클래스에선 access 불가 의미
+		
+		
+		
+*** 리뷰
+1. java 프로그램 개발 기준 : class 단위
+
+2. 소스 구조
+	package 선언구;
+	import  package 활용구;
+	
+	public class class명{
+		멤버 변수;
+		메소드([argument_list]){
+			//로직 구현
+		}
+	}		
+		
+3. 객체 생성 문법
+	타입 변수 = new 생성자();
+	
+4. 멤버 변수, 메소드 호출 하는 문법
+	1단계 : 객체 생성 필수
+	2단계 : 객체 참조 변수로 메소드나 멤머 변수 호출
+	
+	
+5. 명명 규칙
+	1. class명 : 파스칼 케이스 권장
+	2. 변수, 메소드 : 카멜 케이스 권장
+	
+6. 변수 
+	1. 선언된 위치에 따른 변수
+		1. 멤버 - 생성되는 객체를 구성하는 구성
+		2. 로컬 - 메소드 호출시에만 생성 및 메소드 종료시 자동 휘발 
+		
+	2. 타입에 따른 변수
+		1. 기본 타입
+		2. 참조 타입
+		
+	3. 주의 사항
+		멤버변수명과 로컬 변수명이 동일한 경우 구분 키워드
+		this.멤버변수 표현으로 구분
+		

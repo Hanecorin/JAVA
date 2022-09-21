@@ -1,0 +1,86 @@
+1. 실습
+step02 실습 코드 부연 설명
+	@ManyToOne
+	@JoinColumn(name = "team_id") //Team table의 team_id값 참조 설정(fk)
+//	@Column(name = "team_id") 선언시 에러 발생 반드시 삭제 필수 왜 조인으로 인해 자동으로 컬럼명이 team_id로 생성
+	private Team teamId;
+	
+
+실행시 생성된 sql문장
+
+create table Team (
+       team_id bigint not null auto_increment,
+        team_name varchar(255),
+        primary key (team_id)
+    ) engine=InnoDB
+    
+create table Member (
+       member_id bigint not null auto_increment,
+        name varchar(255),
+        team_id bigint,
+        primary key (member_id)
+    ) engine=InnoDB
+    
+    
+@ManyToOne
+@JoinColumn(name = "team_id") 코드로 생성된 sql 추가 문장
+
+ alter table Member 
+       add constraint FK5nt1mnqvskefwe0nj9yjm4eav 
+       foreign key (team_id) 
+       references Team (team_id)        
+    
+    
+    
+    
+    
+2. 늦은 로딩 적용 방식
+	- Team과 Memeber는 1:다 관계
+	- 하나의 team에는 다수의 Member 존재하는 구조
+	
+	1. 멤버 변수 선언구에 적용
+		@ManyToOne(fetch = FetchType.LAZY)
+		
+	2. 예시	
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name = "team_id", nullable = false) 
+		private Team teamId;
+
+    3. 검색 코드
+    	1. member table의 정보만 검색하고자 할 경우 
+	    	Member m = em.find(Member.class, 1L);  //long 타입의 데이터는 l or L로 표현
+			System.out.println(m.getName()); //현주엽
+			- 조인없이 member table에서만 검색하는 하나의 select 문장만 실행
+			    select member0_.member_id as member_i1_0_0_,
+			        member0_.name as name2_0_0_,
+			        member0_.team_id as team_id3_0_0_ 
+			    from
+			        Member member0_ 
+			    where
+			        member0_.member_id=?
+		
+		
+		2. member가 소속된 team table의 정보도 검색하고자 할 경우 
+			 Member m = em.find(Member.class, 1L);  //long 타입의 데이터는 l or L로 표현
+			System.out.println(m.getName()); //현주엽
+			System.out.println(m.getTeamId().getTeamName()); //배구부
+			
+			
+			- 두번의 select 문장 실행
+				1. member의 정보만 코드상에서 호출시에 member select
+			    select member0_.member_id as member_i1_0_0_,
+			        member0_.name as name2_0_0_,
+			        member0_.team_id as team_id3_0_0_ 
+			    from
+			        Member member0_ 
+			    where
+			        member0_.member_id=?
+					
+    			2. team table 정보를 코드상에서 호출시 team select 
+			     select
+			        team0_.team_id as team_id1_1_0_,
+			        team0_.team_name as team_nam2_1_0_ 
+			    from
+			        Team team0_ 
+			    where
+			        team0_.team_id=? 

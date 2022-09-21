@@ -1,0 +1,16 @@
+JPA API
+
+1. EntityManagerFactory
+2. EntityManager
+	- getTransaction()
+	- persist()
+	- clear() : 영속성 컨텍스트 메모리 청소
+	- find() : pk값으로 하나의 결과값 검색
+	- createQuery() : 
+		JPQL 즉 Entity를 기준으로 개발자들이 sql문장 생성
+		- entity 클래스명 변수명등 오타 금지
+		- 다수의 row검색 : getResultList()
+		- 하나의 row검색 : getSingleResult()
+		
+3. EntityTransaction
+	begin()/ commit()/ rollback()

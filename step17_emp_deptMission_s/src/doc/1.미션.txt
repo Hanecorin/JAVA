@@ -1,0 +1,14 @@
+1. 사용 table
+	존재하는 emp & dept table
+	
+2. persistence.xml 파일
+	none으로 설정
+	
+3. 미완성 클래스
+	EmpDeptDAO.java의 TO DO 부분 완성하기
+	
+4. 참고
+	- 실습의 간소화를 위해 MVC를 철저하게 지키지는 않았음
+	
+5. 추가 미션
+	- 제공된 코드 리펙토링	

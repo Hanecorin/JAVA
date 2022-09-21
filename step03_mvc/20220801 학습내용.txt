@@ -1,0 +1,83 @@
+변수
+메소드
+클래스
+생성자 - 객체 생성시 필수 요소
+	new 생성자() - 객체 생성시 절대적인 문법
+new	
+	
+static
+public
+private
+void
+
+byte/short/int/long
+float/double
+boolean
+char
+
+class
+package
+import
+
+jdk
+jvm
+jre
+API(Application Progrmming Interface)
+	- library
+	- 제공받는 library
+	- 상호작용 가능한 매개체
+	- jdk1.8 api
+		String, Integer, Math...
+
+heap
+	instance
+stack
+class영역/method
+
+extends
+
+mvc
+lombok
+maven
+junit
+
+byte code  (file.class)
+컴파일 >javac file.java
+실행>java file
+
+
+eclipse
+
+if
+else
+
+*******************************************
+
+학습내용
+
+1. 코드 구현에 익숙
+	- 2틀한 내용 익숙해지기
+	
+2. mvc pattern 적용, lombok 사용
+3. builder pattern
+	: 기술 문저 예제들 60% 분석
+4. 배열
+	: python의 list
+		- 동적 메모리
+	: 자바의 배열은 한번 생성된 배열 크기는 불변
+		- 동적 크기의 배열 구조가 필요한 경우 java.util.ArrayList 클래스 사용 예정
+
+5. 프로그램 주목
+	- 데이터 사용
+	- 무결한 관리, 적합성 고려
+		: sql 자체가 데이터 저장시에 타입 제한
+ 
+*****************
+이클립스 단축키
+
+1. java.lang package 제외한 모든 api는 import 필수
+	- ctrl+shift+o 
+	
+2. 해당 라인 삭제
+	- ctrl+d
+	...

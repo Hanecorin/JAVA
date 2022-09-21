@@ -1,0 +1,83 @@
+JDBC API 학습
+
+1. DB연동 표준 API
+	- 표준 : 일반적인 것. 또는 평균적인 것.
+	- DB 제품, 개발자와 상관없이  DB연동 코드는 동일
+	
+2. MySQL 접속단계(Java)
+	1. MySQL DB 설치 및 실행
+	2. ID/PW를 통한 해당 위치 DB에 접속 시도 : Connection API(IP, ID, PW, DB)
+		- 실패 시 값 수정 후 재시도
+	3. 성공 시 
+		- SQL문장 구성(Enter로 실행) : Statement API
+			- SQL 문장에 적합한 데이터 확인
+				- DQL(Query(select)) : 검색 구조의 table
+					ResultSet executeQuery("select"){}
+				- DQL(insert/update/delete) : 존재하는 table 내용 수정한 수
+					int executeUpdate("dml"){}
+	4. 접속 해제
+		- close()
+		
+3. 사고
+	Connection
+		IP/ID/PW가 데이터 별로 해당 DB에 접속
+		API 제시 : sun(현 oracle) - 구현 없는 DB 접속 API
+			Java 개발자 - 사용
+				- Driver만 설치 후 활용하며 로직에만 집중하여 개발
+			DB 벤더사
+				- 회사 DB에 접속가능하게 내부 구현
+				- 물품(DB) 판매 수익을 내는 회사들
+				- Java 개발자들 친화적 구조로 설개하여 제공
+				- Driver로 제공
+				
+	- * sun에서 API 제시한 관점
+		1. 특정 벤더사에 종속적인 코드 제시 불필요
+		2. 스펙만 제시
+		3. 실제 구현 : 벤더사로 위임
+		4. 자바 개발자들에게 편의성 제공
+		5. Connection API의 실제 코드 구조는?
+			스펙 + API 이름들
+		6. 결론 
+			스펙과 상수와 메소드 선언구만 제시된 interface 구조로 제공
+
+
+5. interface 구조
+	1. 상수 - 값 불편인 final 변수
+	2. 미완성 메소드 - abstract 메소드, {} 자체가 없음
+	3. 주석(설명 즉 스펙)
+	4. 생략 가능 코드
+		- 상수 : public static final
+		- 미완성 메소드 : public abstract
+		
+	5. 특징
+		- 상위 타입으로 사용 가능
+		- 미완성 메소드(로직)으로 인해 객체 생성 불가
+			: 생성자 자체가 없음
+			: 단, 상속 광계의 하위 클래스에 미완성 메소드를 완벽하게 재정의 하고 객체생성해거 사용, 재정의/상속 필수
+			
+***** 실습 *****
+1. dept table에 CRUD
+	- Database 명 : playdata
+	- ID : bigdata
+	- PW : bigdata
+	- DB IP : localhost =  127.0.0.1
+	
+	DriverManager.getConnection("jdbc:mysql://localhost/playdata?characterEncoding=UTF-8&serverTimezone=UTC", "bigdata", "bigdata");
+	
+2. JDBC1.java
+	- dept의 select * 먼저 개발
+	- 기본 개발 방식에 대한 코드
+	- DeptDAO2에서 1차 개선
+		- 중복 코드 DBUtil.java로 분리
+	
+3. 중복 코드 제거 
+	- DBUtild와 DeptDAO2
+	
+4. DB설정 정보를 별도의 properties 파일로 분리
+	- 필요성
+		- DB의 설정 정보 수정으로 코드 재 컴파일 서버에 재배포 단계 생략
+		- 보안을 고려 해서 코드상에 DB 정보 분리
+		- spring boot & jpa
+		
+	- DB의 설정 정보를 별도의 properties 파일로 분리
+	- DB.properties

@@ -1,0 +1,27 @@
+예외 적용
+
+1. pk 중복 시 예외 발생 처리
+
+2. class들 구조화 되어 MVC등으로 업무 분화
+
+3. 예시
+	end user : 가입(모든 정보 입력)
+		-> 가입 저장
+		-> 중복 불허 가입 실패
+		-> 중복되지 않은 데이트로 재시도
+		
+4. 예외 처리
+	- 발생 가능한 코드 내 try ~ catch
+	- 로직을 호출한 곳으로 처리 위임
+	
+5. sql과 java 예외 매핑
+
+6. 추가 실습
+	- StartView와 TalentDonationProjectService 편집
+		view와 controller와 model 혼용
+		
+		- StartView : intro 화면, controller
+		- TalentDonationProjectService : controller와 model
+		
+		- insert 로직에 한해서만 구조를 수정
+			- 로직은 동일한 개선(리팩토리)

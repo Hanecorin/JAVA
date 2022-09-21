@@ -1,0 +1,26 @@
+개발 방법 1
+public class Employee {
+	private int empno;  //사번
+	private String ename;  //사원명
+	private double sal; //월 급여
+	
+	private Department detp;//소속된 부서 정보
+}
+1. 해당 사원의 모든 정보를 crud시엔 2번보단 구조가 복잡
+2. 직원이 소속된 부서 정보가 변경된 경우 Department 객체의 정보만 한번 수정시
+소속된 모든 Employee들은 공유 즉 유지보수 수정시 용이할수도 있음 
+
+
+개발 방법 2
+public class Employee {
+	private int empno;  //사번
+	private String ename;  //사원명
+	private double sal; //월 급여
+	
+	private int deptno; //부서 번호
+	private String dname; //부서명
+	private String loc; 
+}
+1. Employee class 하나 만으로 직원의 모든 정보 crud 쉬움
+2. 해당 부서가 이전했다 가정시
+	생성된 모든 직원 객체의 loc값을 일일이 다 수정 ....

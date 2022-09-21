@@ -1,0 +1,70 @@
+1. table 구조
+	- java 기본시 사용했던 재능기부 주제
+	
+	- 기부자, 수혜자, 기부종류는 진행되는 project table과 조인
+	- activist / recipient / probono 의 pk를 probono_project table에서 참조
+		- table 관계
+		- 부모 table(주) / 자식 table(종)
+			- 부모 table
+				: activist / recipient / probono
+			- 자식 table
+				: probono_project
+			
+			
+	- 예시			
+		emp와 dept에서의 관계형성
+			- dept의 pk를 emp의 detpno에서 참조
+			- dept는 부모 / emp는 자식
+			- emp에서 이미 dept table에서 사용
+				: emp table 삭제 시도시 고려사항  - 삭제 성공
+				: dept table 삭제 시도 고려사항 - 모든 자식 관계를 정리하거나 아니면 자식 자체를 삭제 후 부모 table 삭제
+					- 자식들에서 사용되는 데이터가 있을 경우 부모 table은 삭제 불가
+
+
+2. @Builder 사용법			
+	1. 상속 관계
+		People.java
+			@Builder
+			public class People {}
+			
+		ActivistDTO.java
+			public class ActivistDTO extends People{
+			private String major;		
+		
+			@Builder(builderMethodName = "activistDTOBuilder")
+			public ActivistDTO(String id, String name, String password, String major) {
+				super(id, name, password);
+				this.major = major;
+			}
+
+
+	- 상속 관계상에서 객체 생성시 부모로 부터 상속받는 멤버변수를 초기화
+		super(값1, 값2, ..)
+		
+	- @Builder 기본 기질
+		- 생성자를 class에 구현하는 것을 선호하지 않음
+		- 부득이하게 명시적인 생성자와 함께 개발 해야 할 경우 권장하는 코드
+		- 해결책
+			생성자 선언구에 @Builder 선언
+			선언시 activistDTOBuilder()라는 이름의 메소드 생성
+						
+			@Builder(builderMethodName = "activistDTOBuilder")
+			public ActivistDTO(String id, String name, String password, String major) {
+				super(id, name, password);
+				this.major = major;
+			}
+			
+3. ProbonoService.java의 필요성
+	1. 엔터프라이즈 솔류션은 방대한 로직
+	2. 구조가 더 견고 및 세밀
+	3. 예시
+		계좌 이체 로직
+		id/pw 인증 -> 계좌 존재 확인 -> .. -> 계좌 잔액 확인 -> .. -> 인출가능 금액 산정 -> 이체할 계좌 존재 여부 확인
+		-> 인출 -> 입금
+		- client -> view -> controller -> service(이체로직의 트랜젝션 처리) -> dao -> db -> dao -> service -> controller -> view
+
+	4. spring 관점
+		- service 로직을 구현한 클래스에 선언되는 어노테이션
+			@Service
+		- DAO 기능 즉 db(저장소, repository 로직을 구현한 클래스에 선언되는 어노테이션
+			@Repository
